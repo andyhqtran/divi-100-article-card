@@ -1,0 +1,10 @@
+@import "functions";
+@import "mixins";
+@import "colors";
+
+$style: 4;
+
+$prefix-plugin: "custom_search_fields";
+$prefix: ".et_divi_100_" + $prefix-plugin;
+$prefix-style: $prefix + "--style-";
+$prefix-type: $prefix + "--type-";

@@ -1,0 +1,3 @@
+[submodule "divi-100-setup"]
+	path = divi-100-setup
+	url = git@github.com:andyhqtran/divi-100-submodule.git

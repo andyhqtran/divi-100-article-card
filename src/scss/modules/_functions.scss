@@ -1,0 +1,13 @@
+$default-browser-font-size: 16;
+
+@function rem($pixels, $context: $default-browser-font-size) {
+  @if unitless($pixels) {
+    $pixels: $pixels * 1px;
+  }
+
+  @if unitless($context) {
+    $context: $context * 1px;
+  }
+
+  @return $pixels / $context * 1rem;
+}

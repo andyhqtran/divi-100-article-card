@@ -1,4 +1,3 @@
-(function() {
-
-
-}).call(this);
+jQuery(document).ready(function ($) {
+  $();
+});

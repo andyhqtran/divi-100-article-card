@@ -3,22 +3,47 @@ jQuery(document).ready(function ($) {
 
   $post.each(function () {
     if (!$(this).hasClass('et_pb_no_thumb') | !$(this).hasClass('format-standard')) {
-      var excerpt = $(this).clone().children().remove().end().text();
 
-      $(this).append('<div class="excerpt">' + excerpt + '</div>');
+      var $excerpt = $(this).clone().children().remove().end().text(),
+        $this = $(this),
+        $post_meta = $this.children('.post-meta');
 
-      $(this).contents().filter(function () {
-        return (this.nodeType == 3);
-      }).remove();
+      // Append excerpt
+      $this
+        .append('<div class="excerpt">' + $excerpt + '</div>');
 
-      $(this).children('.post-meta').children('.published').appendTo(this);
-      $(this).children('.post-meta').children('.author').appendTo(this);
-      $(this).children('.post-meta').children('a').addClass('category').appendTo(this);
+      // Remove text
+      $this
+        .contents()
+        .filter(function () {
+          return (this.nodeType == 3);
+        })
+        .remove();
 
-      var comments = $(this).children('.post-meta').text().replace(/[^a-zA-Z0-9 ]/g, "").replace("by", "").trim();
-      $(this).children('.post-meta').html(comments);
-      $('<div class="comments">' + comments + '</div>').appendTo(this);
-      $(this).children('.post-meta').remove();
+      // Append category
+      $post_meta
+        .children('a')
+        .addClass('category')
+        .appendTo(this);
+
+      // Append author
+      $post_meta
+        .children('.author')
+        .appendTo(this);
+
+      // Remove special characters
+      var comments = $post_meta.text().replace(/[^a-zA-Z0-9 ]/g, "").replace("by", "").trim();
+      $post_meta
+        .html(comments);
+
+      // Append comment
+      $('<div class="comments">' + comments + '</div>')
+        .appendTo(this);
+
+      // Remove Post Meta
+      $post_meta
+        .remove();
+
     }
   });
 });

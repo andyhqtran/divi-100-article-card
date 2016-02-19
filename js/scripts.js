@@ -1,5 +1,5 @@
 jQuery(document).ready(function ($) {
-  $('.et_pb_post').each(function () {
+  $('.divi-100-article-card').find('.et_pb_post').each(function () {
     var $this = $(this),
       $standardFormat = $this.hasClass('format-standard'),
       $hasThumbnail = $this.hasClass('has-post-thumbnail'),
@@ -7,11 +7,12 @@ jQuery(document).ready(function ($) {
       $linkFormat = $this.hasClass('format-link'),
       $quoteFormat = $this.hasClass('format-quote');
 
-    // Add 'article-card' to current module
-    $this.addClass('article-card');
 
     // Check if module has thumbnail
     if (!$standardFormat | $hasThumbnail) {
+
+      // Add 'article-card' to current module
+      $this.addClass('article-card');
 
       // Creates post content and appends it to module
       $this.append('<div class="post-content"></div>');
@@ -63,13 +64,20 @@ jQuery(document).ready(function ($) {
 
       // Delay by 1ms
       setTimeout(function () {
-        var $new_height = $this.outerHeight(false);
+        var $new_height = $this.height();
 
         $this.css({
           'height': $new_height
-        })
+        });
 
-        $post_content.css('position', 'absolute');
+        $post_content.css({
+          'position': 'absolute',
+          'font-size': '12px'
+        });
+
+        var $short_text = $post_content.children('.excerpt').text().trim().substring(0, 100).split(" ").slice(0, -1).join(" ") + "...";
+
+        $post_content.children('.excerpt').text($short_text);
       }, 1);
 
       // Hide excerpt

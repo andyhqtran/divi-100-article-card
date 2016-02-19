@@ -27,6 +27,7 @@ jQuery(document).ready(function ($) {
         })
         .remove();
 
+      // Append date
       $post_meta
         .children('.published')
         .appendTo(this);
@@ -35,6 +36,10 @@ jQuery(document).ready(function ($) {
         function (i, h) {
           return h.replace(/(\d+.\s)([\d\D]*)/g, '<div class="date"><span class="day">$1</span><span class="month">$2</span></div>');
         });
+
+      if (!$(this).hasClass('format-quote') && !$(this).hasClass('format-link') && !$(this).hasClass('format-audio')) {
+        $(this).children('.date').css('background-color', $('.category').css('color'));
+      }
 
       // Append category
       $post_meta
@@ -63,8 +68,6 @@ jQuery(document).ready(function ($) {
     } else {
       $(this).append('test')
     }
-    console.log($('.category').css('color'));
-
   });
 
 });

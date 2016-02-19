@@ -2,12 +2,14 @@ jQuery(document).ready(function ($) {
   var $post = $('.et_pb_post');
 
   $post.each(function () {
-    if (!$(this).hasClass('et_pb_no_thumb') | !$(this).hasClass('format-standard')) {
-
+    if (!$(this).hasClass('format-standard') | $(this).hasClass('has-post-thumbnail')) {
+      $(this).addClass('article-card');
       var $excerpt = $(this).clone().children().remove().end().text(),
         $this = $(this),
         $content = $this.children('.post-content'),
         $post_meta = $this.children('.post-meta');
+
+      // $this.addClass('article-card');
 
       $this
         .append('<div class="post-content"></div>');
@@ -28,6 +30,11 @@ jQuery(document).ready(function ($) {
       $post_meta
         .children('.published')
         .appendTo(this);
+
+      $this.children('.published').replaceWith(
+        function (i, h) {
+          return h.replace(/(\d+.\s)([\d\D]*)/g, '<div class="date"><span class="day">$1</span><span class="month">$2</span></div>');
+        });
 
       // Append category
       $post_meta
@@ -53,6 +60,11 @@ jQuery(document).ready(function ($) {
       $post_meta
         .remove();
 
+    } else {
+      $(this).append('test')
     }
+    console.log($('.category').css('color'));
+
   });
+
 });

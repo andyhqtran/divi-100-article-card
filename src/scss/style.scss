@@ -2,10 +2,36 @@
 
 .divi-100-article-card {
   &.et_pb_blog_grid {
-    .et_pb_post {
+    .et_pb_post.article-card {
       position: relative;
       border: 0;
       box-shadow: 0px 1px 2px 0px rgba($black, 0.15);
+
+      .date {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #000;
+        width: 54px;
+        height: 54px;
+        border-radius: 100%;
+        padding: 10px;
+        line-height: 1;
+        box-sizing: border-box;
+        font-weight: 700;
+        text-align: center;
+
+        .day {
+          font-size: 18px;
+        }
+
+        .month {
+          font-size: 12px;
+          text-transform: uppercase;
+        }
+      }
+
+      .post-content {}
 
       // .category {
       //   position: absolute;

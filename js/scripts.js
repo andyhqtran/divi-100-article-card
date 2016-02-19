@@ -1,102 +1,87 @@
 jQuery(document).ready(function ($) {
-  var $post = $('.et_pb_post');
+  $('.et_pb_post').each(function () {
+    var $this = $(this),
+      $standardFormat = $this.hasClass('format-standard'),
+      $hasThumbnail = $this.hasClass('has-post-thumbnail'),
+      $audioFormat = $this.hasClass('format-audio'),
+      $linkFormat = $this.hasClass('format-link'),
+      $quoteFormat = $this.hasClass('format-quote');
 
-  $post.each(function () {
-    if (!$(this).hasClass('format-standard') | $(this).hasClass('has-post-thumbnail')) {
-      $(this).addClass('article-card');
+    // Add 'article-card' to current module
+    $this.addClass('article-card');
+
+    // Check if module has thumbnail
+    if (!$standardFormat | $hasThumbnail) {
+
+      // Creates post content and appends it to module
+      $this.append('<div class="post-content"></div>');
+
       var $excerpt = $(this).clone().children().remove().end().text(),
-        $this = $(this),
-        $content = $this.children('.post-content'),
+        $excerpt_wrap = $('<div class="excerpt">'),
+        $post_content = $this.find('.post-content'),
         $post_meta = $this.children('.post-meta');
 
-      // $this.addClass('article-card');
+      // Append excerpt to post content
+      $excerpt_wrap.text($excerpt).appendTo($post_content);
 
-      $this
-        .append('<div class="post-content"></div>');
-
-      // Append excerpt
-      $this
-        .children('.post-content')
-        .append('<div class="excerpt">' + $excerpt + '</div>');
-
-      // Remove text
-      $this
-        .contents()
-        .filter(function () {
-          return (this.nodeType == 3);
-        })
-        .remove();
+      // Removes old text from modules
+      $this.contents().filter(function () {
+        return (this.nodeType == 3);
+      }).remove();
 
       // Append date
-      $post_meta
-        .children('.published')
-        .appendTo(this);
-
-      $this.children('.published').replaceWith(
-        function (i, h) {
+      $this.find('.published').appendTo(this)
+        .replaceWith(function (i, h) {
           return h.replace(/(\d+.\s)([\d\D]*)/g, '<div class="date"><span class="day">$1</span><span class="month">$2</span></div>');
         });
 
       // Append category
-      $post_meta
-        .children('a')
-        .addClass('category')
-        .appendTo($this.children('.post-content'));
+      $post_meta.children('a').addClass('category').appendTo($post_content);
 
-      // Append author
-      $post_meta
-        .children('.author')
-        .prependTo($this.children('.post-content'));
+      // Append author to post content
+      $this.find('.author').appendTo($post_content);
 
-      $this
-        .children('.entry-title')
-        .prependTo($this.children('.post-content'));
+      // Prepend title to post content
+      $this.children('.entry-title').prependTo($post_content);
 
       // Remove special characters
       var comments = $post_meta.text().replace(/[^a-zA-Z0-9 ]/g, "").replace("by", "").trim();
-      $post_meta
-        .html(comments);
-
-      // Append comment
-      $('<div class="comments">' + comments + '</div>')
-        .appendTo($this.children('.post-content'));
 
       // Remove Post Meta
-      $post_meta
-        .remove();
+      $post_meta.remove();
 
-      if (!$(this).hasClass('format-quote') && !$(this).hasClass('format-link') && !$(this).hasClass('format-audio')) {
+      // Append comment
+      $('<span class="comments">' + comments + '</span>').appendTo($post_content);
+
+      // Apply accent color to date and category block
+      if (!$quoteFormat && !$linkFormat && !$audioFormat) {
         var $accent_color = $('.author a').css('color');
-        $(this).children('.date').css('background-color', $accent_color);
-        $(this).children().children('a.category').css('background-color', $accent_color);
+
+        $this.find('.date').css('background-color', $accent_color);
+        $this.find('a.category').css('background-color', $accent_color);
       }
 
+      // Delay by 1ms
       setTimeout(function () {
         var $new_height = $this.outerHeight(false);
-        // var $excerpt_height = $this.children().children('.excerpt').outerHeight();
 
         $this.css({
           'height': $new_height
         })
 
-        $this.children('.post-content').css('position', 'absolute');
-
+        $post_content.css('position', 'absolute');
       }, 1);
 
+      // Hide excerpt
       $this.children().children('.excerpt').hide();
 
+      // Toggle animate height & opacity on hover
       $(this).children('.post-content').hover(function () {
         $(this).children('.excerpt').stop().animate({
           height: "toggle",
           opacity: "toggle"
         });
       });
-
-
-
-    } else {
-      $(this).append('test')
     }
   });
-
 });

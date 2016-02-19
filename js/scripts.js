@@ -73,19 +73,20 @@ jQuery(document).ready(function ($) {
 
       setTimeout(function () {
         var $new_height = $this.outerHeight(false);
-        var $excerpt_height = $this.children().children('.excerpt').outerHeight();
+        // var $excerpt_height = $this.children().children('.excerpt').outerHeight();
 
         $this.css({
-          'height': $new_height - $excerpt_height
+          'height': $new_height
         })
 
         $this.children('.post-content').css('position', 'absolute');
 
-        $this.children().children('.excerpt').hide();
       }, 1);
 
+      $this.children().children('.excerpt').hide();
+
       $(this).children('.post-content').hover(function () {
-        $(this).children('.excerpt').animate({
+        $(this).children('.excerpt').stop().animate({
           height: "toggle",
           opacity: "toggle"
         });

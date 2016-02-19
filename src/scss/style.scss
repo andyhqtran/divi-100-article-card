@@ -1,5 +1,14 @@
 @import "modules/base";
 
+.divi-100-article-card {
+  &.et_pb_blog_grid {
+    .et_pb_post {
+      border: 0;
+      box-shadow: 0px 1px 2px 0px rgba($black, 0.15);
+    }
+  }
+}
+
 @import "partials/type-1";
 @import "partials/type-2";
 @import "partials/type-3";

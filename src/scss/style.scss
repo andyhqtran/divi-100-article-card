@@ -6,6 +6,11 @@
       position: relative;
       border: 0;
       box-shadow: 0px 1px 2px 0px rgba($black, 0.15);
+      padding: 0;
+
+      div:first-child {
+        margin: 0;
+      }
 
       .date {
         z-index: 10;
@@ -35,8 +40,25 @@
 
       .post-content {
         position: relative;
+        bottom: 0;
+        background: darken($white, 10%);
+        background: $white;
+        width: 100%;
+        padding: 10px;
+
+        .entry-title {
+          font-size: 26px;
+          font-weight: 700;
+        }
+
+        .author {
+          display: block;
+          margin: 0 0 20px;
+          font-size: 18px;
+        }
 
         .category {
+          z-index: 10;
           position: absolute;
           top: -34px;
           left: 0;
@@ -50,16 +72,24 @@
         }
       }
 
-      // .category {
-      //   position: absolute;
-      //   top: -34px;
-      //   left: 0;
-      //   background: #e74c3c;
-      //   padding: 10px 15px;
-      //   color: #FFFFFF;
-      //   font-size: 14px;
-      //   font-weight: 600;
-      //   text-transform: uppercase;
+      .et-pb-controllers {
+        right: 20px;
+        left: auto;
+        text-align: right;
+
+        a {
+          color: transparent;
+        }
+      }
+
+      // &.format-quote,
+      // &.format-link,
+      // &.format-audio {
+      //   .post-content {
+      //     .category {
+      //       top: -34px;
+      //     }
+      //   }
       // }
 
     }

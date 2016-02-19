@@ -37,10 +37,6 @@ jQuery(document).ready(function ($) {
           return h.replace(/(\d+.\s)([\d\D]*)/g, '<div class="date"><span class="day">$1</span><span class="month">$2</span></div>');
         });
 
-      if (!$(this).hasClass('format-quote') && !$(this).hasClass('format-link') && !$(this).hasClass('format-audio')) {
-        $(this).children('.date').css('background-color', $('.category').css('color'));
-      }
-
       // Append category
       $post_meta
         .children('a')
@@ -50,7 +46,11 @@ jQuery(document).ready(function ($) {
       // Append author
       $post_meta
         .children('.author')
-        .appendTo($this.children('.post-content'));
+        .prependTo($this.children('.post-content'));
+
+      $this
+        .children('.entry-title')
+        .prependTo($this.children('.post-content'));
 
       // Remove special characters
       var comments = $post_meta.text().replace(/[^a-zA-Z0-9 ]/g, "").replace("by", "").trim();
@@ -64,6 +64,34 @@ jQuery(document).ready(function ($) {
       // Remove Post Meta
       $post_meta
         .remove();
+
+      if (!$(this).hasClass('format-quote') && !$(this).hasClass('format-link') && !$(this).hasClass('format-audio')) {
+        var $accent_color = $('.author a').css('color');
+        $(this).children('.date').css('background-color', $accent_color);
+        $(this).children().children('a.category').css('background-color', $accent_color);
+      }
+
+      setTimeout(function () {
+        var $new_height = $this.outerHeight(false);
+        var $excerpt_height = $this.children().children('.excerpt').outerHeight();
+
+        $this.css({
+          'height': $new_height - $excerpt_height
+        })
+
+        $this.children('.post-content').css('position', 'absolute');
+
+        $this.children().children('.excerpt').hide();
+      }, 1);
+
+      $(this).children('.post-content').hover(function () {
+        $(this).children('.excerpt').animate({
+          height: "toggle",
+          opacity: "toggle"
+        });
+      });
+
+
 
     } else {
       $(this).append('test')

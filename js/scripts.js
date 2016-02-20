@@ -56,7 +56,7 @@ jQuery(document).ready(function ($) {
 
       // Apply accent color to date and category block
       if (!$quoteFormat && !$linkFormat && !$audioFormat) {
-        var $accent_color = $('.author a').css('color');
+        var $accent_color = $('#top-header').css('background-color');
 
         $this.find('.date').css('background-color', $accent_color);
         $this.find('a.category').css('background-color', $accent_color);

@@ -62,33 +62,35 @@ jQuery(document).ready(function ($) {
         $this.find('a.category').css('background-color', $accent_color);
       }
 
-      // Delay by 1ms
-      setTimeout(function () {
-        var $new_height = $this.height();
-
-        $this.css({
-          'height': $new_height
-        });
-
-        $post_content.css({
-          'position': 'absolute',
-          'font-size': '12px'
-        });
-
-        var $short_text = $post_content.children('.excerpt').text().trim().substring(0, 100).split(" ").slice(0, -1).join(" ") + "...";
-
-        $post_content.children('.excerpt').text($short_text);
-      }, 1);
-
       // Hide excerpt
       $this.children().children('.excerpt').hide();
+
+      var $short_text = $post_content.children('.excerpt').text().trim().substring(0, 100).split(" ").slice(0, -1).join(" ") + "...";
+
+      $post_content.children('.excerpt').text($short_text);
+
+      function $post_module_size() {
+        var $post_content_height = $post_content.outerHeight();
+
+
+        $this.css({
+          'padding-bottom': $post_content_height
+        });
+      }
+
+      $post_module_size();
+
+      $(window).resize(function () {
+
+        $post_module_size();
+      });
 
       // Toggle animate height & opacity on hover
       $(this).children('.post-content').hover(function () {
         $(this).children('.excerpt').stop().animate({
           height: "toggle",
           opacity: "toggle"
-        });
+        }, 200);
       });
     }
   });

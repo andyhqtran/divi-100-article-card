@@ -44,9 +44,8 @@
         }
 
         .post-content {
-          position: relative;
+          position: absolute;
           bottom: 0;
-          background: darken($white, 10%);
           background: $white;
           width: 100%;
           padding: 30px;

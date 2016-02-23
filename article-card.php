@@ -28,6 +28,7 @@ class ET_Divi_100_Article_Card {
 	public static $instance;
 	public $main_prefix;
 	public $plugin_slug;
+	public $plugin_id;
 	public $plugin_prefix;
 
 	/**
@@ -48,6 +49,7 @@ class ET_Divi_100_Article_Card {
 		$this->main_prefix   = 'et_divi_100_';
 		$this->plugin_slug   = 'article_card';
 		$this->plugin_prefix = "{$this->main_prefix}{$this->plugin_slug}-";
+		$this->plugin_id     = "{$this->main_prefix}{$this->plugin_slug}";
 
 		$this->init();
 	}
@@ -58,37 +60,18 @@ class ET_Divi_100_Article_Card {
 	 * @return void
 	 */
 	private function init(){
-		add_action( 'admin_menu',            array( $this, 'add_submenu' ), 30 ); // Make sure the priority is higher than Divi 100's add_menu()
 		add_action( 'wp_enqueue_scripts',    array( $this, 'enqueue_frontend_scripts' ) );
-	}
 
-	/**
-	 * Add submenu
-	 * @return void
-	 */
-	function add_submenu() {
-		add_submenu_page(
-			$this->main_prefix . 'options',
-			__( 'Article Card' ),
-			__( 'Article Card' ),
-			'switch_themes',
-			$this->plugin_prefix . 'options',
-			array( $this, 'render_options_page' )
-		);
-	}
+		if ( is_admin() ) {
+			$settings_args = array(
+				'plugin_id'   => $this->plugin_id,
+				'title'       => __( 'Article Cards' ),
+				'description' => __( 'Nullam quis risus eget urna mollis ornare vel eu leo.' ),
+				'fields'      => array(),
+			);
 
-	/**
-	 * Render options page
-	 * @return void
-	 */
-	function render_options_page() {
-		?>
-		<div class="wrap">
-			<h1><?php _e( 'Article Card' ); ?></h1>
-			<p><?php _e( 'Hello, it is me.' ); ?></p>
-		</div>
-		<!-- /.wrap -->
-		<?php
+			new Divi_100_Settings( $settings_args );
+		}
 	}
 
 	/**

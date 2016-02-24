@@ -51,7 +51,10 @@ class ET_Divi_100_Article_Card {
 		$this->plugin_prefix = "{$this->main_prefix}{$this->plugin_slug}-";
 		$this->plugin_id     = "{$this->main_prefix}{$this->plugin_slug}";
 
-		$this->init();
+		// Initialize if Divi is active
+		if ( et_divi_100_is_active() ) {
+			$this->init();
+		}
 	}
 
 	/**

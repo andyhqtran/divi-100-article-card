@@ -2,7 +2,7 @@
   "name": "divi-100-article-card",
   "version": "0.0.1",
   "description": "",
-  "main": "random-background.php",
+  "main": "article-card.php",
   "scripts": {
     "init": "cd grunt && npm install",
     "grunt": "cd grunt && grunt",

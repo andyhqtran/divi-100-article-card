@@ -30,11 +30,6 @@ nbproject
 .tmp
 .build
 
-# Files
-*.css
-*.map
-*.html
-
 # Folders
 components
 bower_components

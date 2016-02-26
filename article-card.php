@@ -82,8 +82,8 @@ class ET_Divi_100_Article_Card {
 	 * @return void
 	 */
 	function enqueue_frontend_scripts() {
-		wp_enqueue_style( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'css/style.css' );
-		wp_enqueue_script( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'js/scripts.js', array( 'jquery', 'divi-custom-script' ), '0.0.1', true );
+		wp_enqueue_style( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'assets/css/style.css' );
+		wp_enqueue_script( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'assets/js/scripts.js', array( 'jquery', 'divi-custom-script' ), '0.0.1', true );
 	}
 }
 ET_Divi_100_Article_Card::instance();

@@ -55,7 +55,7 @@ class ET_Divi_100_Article_Card_Config {
 			'plugin_slug'        => $plugin_slug,
 			'plugin_id'          => "{$main_prefix}{$plugin_slug}",
 			'plugin_prefix'      => "{$main_prefix}{$plugin_slug}-",
-			'plugin_version'     => 20160305,
+			'plugin_version'     => 20160526,
 			'plugin_dir_path'    => plugin_dir_path( __FILE__ ),
 		);
 	}

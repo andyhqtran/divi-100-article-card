@@ -97,6 +97,8 @@ class ET_Divi_100_Article_Card {
 	 */
 	public static $instance;
 	public $config;
+	protected $settings;
+	protected $utils;
 
 	/**
 	 * Gets the instance of the plugin
@@ -113,7 +115,9 @@ class ET_Divi_100_Article_Card {
 	 * Constructor
 	 */
 	private function __construct(){
-		$this->config = ET_Divi_100_Article_Card_Config::info();
+		$this->config   = ET_Divi_100_Article_Card_Config::info();
+		$this->settings = maybe_unserialize( get_option( $this->config['plugin_id'] ) );
+		$this->utils    = new Divi_100_Utils( $this->settings );
 
 		// Initialize if Divi is active
 		if ( et_divi_100_is_active() ) {
@@ -127,14 +131,23 @@ class ET_Divi_100_Article_Card {
 	 * @return void
 	 */
 	private function init(){
-		add_action( 'wp_enqueue_scripts',    array( $this, 'enqueue_frontend_scripts' ) );
+		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_frontend_scripts' ) );
+		add_filter( 'body_class',         array( $this, 'body_class' ) );
 
 		if ( is_admin() ) {
 			$settings_args = array(
 				'plugin_id'   => $this->config['plugin_id'],
 				'title'       => $this->config['plugin_name'],
 				'description' => $this->config['plugin_description'],
-				'fields'      => array(),
+				'fields'      => array(
+					array(
+						'type'              => 'toggle',
+						'id'                => 'activate',
+						'label'             => __( 'Activate Article Card' ),
+						'description'       => __( 'Proper description goes here' ),
+						'sanitize_callback' => 'et_divi_100_sanitize_toggle',
+					),
+				),
 			);
 
 			new Divi_100_Settings( $settings_args );
@@ -148,5 +161,21 @@ class ET_Divi_100_Article_Card {
 	function enqueue_frontend_scripts() {
 		wp_enqueue_style( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', array(), $this->config['plugin_version'] );
 		wp_enqueue_script( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'assets/js/scripts.js', array( 'jquery', 'divi-custom-script' ), $this->config['plugin_version'], true );
+	}
+
+	/**
+	* Add specific class to <body>
+	* @return array
+	*/
+	function body_class( $classes ) {
+		// Get selected style
+		$activation = et_divi_100_sanitize_toggle( $this->utils->get_value( 'activate' ) );
+
+		// Assign specific class to <body> if needed
+		if ( ! is_admin() && 'on' === $activation ) {
+			$classes[] = esc_attr( 'divi-100-article-card' );
+		}
+
+		return $classes;
 	}
 }

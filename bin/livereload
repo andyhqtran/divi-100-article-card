@@ -1,1 +1,1 @@
-livereload -e 'scss'
+nodemon livereload.js

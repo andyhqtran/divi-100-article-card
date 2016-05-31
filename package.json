@@ -4,9 +4,14 @@
   "description": "",
   "main": "article-card.php",
   "scripts": {
-    "init": "cd grunt && npm install",
-    "grunt": "cd grunt && grunt",
-    "submodule": "git submodule foreach git pull origin master"
+    "start": "./bin/start",
+    "autoprefixer": "./bin/autoprefixer",
+    "csscomb": "./bin/csscomb",
+    "build": "./bin/build",
+    "build-css": "./bin/build-css",
+    "livereload": "./bin/livereload",
+    "watch-css": "./bin/watch-css",
+    "watch-scss": "./bin/watch-scss"
   },
   "repository": {
     "type": "git",
@@ -17,5 +22,14 @@
   "bugs": {
     "url": "https://github.com/andyhqtran/divi-100-article-card/issues"
   },
-  "homepage": "https://github.com/andyhqtran/divi-100-article-card#readme"
+  "homepage": "https://github.com/andyhqtran/divi-100-article-card#readme",
+  "devDependencies": {
+    "autoprefixer": "^6.3.6",
+    "concurrently": "^2.1.0",
+    "csscomb": "^3.1.8",
+    "livereload": "^0.4.1",
+    "node-sass": "^3.7.0",
+    "nodemon": "^1.9.2",
+    "postcss": "^5.0.21"
+  }
 }

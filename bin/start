@@ -1,0 +1,1 @@
+concurrent "npm run watch-scss" "npm run watch-css" "npm run livereload"

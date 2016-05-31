@@ -1,0 +1,1 @@
+nodemon -e css --ignore node_modules/ -x "npm run autoprefixer"

@@ -1,0 +1,1 @@
+node-sass --output-style expanded --indent-type space --indent-width 2 --source-map-embed true --include-path scss scss/style.scss assets/css/style.css

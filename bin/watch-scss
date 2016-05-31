@@ -1,0 +1,1 @@
+nodemon -e scss --ignore node_modules/ -x "npm run build-css"

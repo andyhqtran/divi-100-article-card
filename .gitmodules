@@ -1,6 +1,3 @@
 [submodule "divi-100-setup"]
 	path = divi-100-setup
 	url = git@github.com:andyhqtran/divi-100-submodule.git
-[submodule "divi-100-grunt"]
-	path = grunt
-	url = git@github.com:andyhqtran/divi-100-grunt-submodule.git

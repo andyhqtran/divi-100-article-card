@@ -182,7 +182,9 @@ class ET_Divi_100_Article_Card {
 
 		if ( $accent_color && $accent_color !== $accent_color_default ) {
 			$custom_css = sprintf(
-				".article-card__category, .article-card__date, .article-card__sub-title { color: %s; }",
+				'.article-card__category,
+				.article-card__date { background-color: %1$s; }
+				.article-card__sub-title { color: %1$s; }',
 				et_divi_100_sanitize_alpha_color( $accent_color )
 			);
 			wp_add_inline_style( 'custom-article-cards', $custom_css );

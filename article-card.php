@@ -51,7 +51,6 @@ class ET_Divi_100_Article_Card_Config {
 		return array(
 			'main_prefix'        => $main_prefix,
 			'plugin_name'        => __( 'Article Card' ),
-			'plugin_description' => __( 'This plugin adds article news card styles support for Divi Blog Post modules' ),
 			'plugin_slug'        => $plugin_slug,
 			'plugin_id'          => "{$main_prefix}{$plugin_slug}",
 			'plugin_prefix'      => "{$main_prefix}{$plugin_slug}-",
@@ -139,7 +138,6 @@ class ET_Divi_100_Article_Card {
 				'plugin_id'   => $this->config['plugin_id'],
 				'plugin_slug' => $this->config['plugin_slug'],
 				'title'       => $this->config['plugin_name'],
-				'description' => $this->config['plugin_description'],
 				'fields'      => $this->settings_fields(),
 			);
 

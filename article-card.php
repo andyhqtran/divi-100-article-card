@@ -55,7 +55,7 @@ class ET_Divi_100_Article_Card_Config {
 			'plugin_slug'        => $plugin_slug,
 			'plugin_id'          => "{$main_prefix}{$plugin_slug}",
 			'plugin_prefix'      => "{$main_prefix}{$plugin_slug}-",
-			'plugin_version'     => 20160526,
+			'plugin_version'     => 20160601,
 			'plugin_dir_path'    => plugin_dir_path( __FILE__ ),
 		);
 	}
@@ -137,6 +137,7 @@ class ET_Divi_100_Article_Card {
 		if ( is_admin() ) {
 			$settings_args = array(
 				'plugin_id'   => $this->config['plugin_id'],
+				'plugin_slug' => $this->config['plugin_slug'],
 				'title'       => $this->config['plugin_name'],
 				'description' => $this->config['plugin_description'],
 				'fields'      => $this->settings_fields(),

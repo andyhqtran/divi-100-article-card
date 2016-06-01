@@ -1,14 +1,5 @@
-// .article-card
-//   .article-card__date
-//   .article-card__category
-//   .article-card__content
-//   .article-card__title
-//   .article-card__sub-title
-//   .article-card__excerpt
-//   .article-card__meta
-
 jQuery(document).ready(function ($) {
-  if (!$('.divi-100-article-card')) {
+  if (!$('.divi-100-article-card').length) {
     return false;
   } else {
     $('.et_pb_blog_grid').find('.et_pb_post').each(function() {
@@ -141,8 +132,10 @@ jQuery(document).ready(function ($) {
        */
       var comments = postMeta.text().replace(/[^a-zA-Z0-9 ]/g, "").replace("by", "").trim();
 
-      $('<span class="article-card__comments">' + comments + '</span>')
-        .appendTo($this.find('.article-card__meta'));
+      if (comments) {
+        $('<span class="article-card__comments">' + comments + '</span>')
+          .appendTo($this.find('.article-card__meta'));
+      }
 
       /**
        * Remove old post-meta div

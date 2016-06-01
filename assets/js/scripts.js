@@ -1,97 +1,201 @@
+// .article-card
+//   .article-card__date
+//   .article-card__category
+//   .article-card__content
+//   .article-card__title
+//   .article-card__sub-title
+//   .article-card__excerpt
+//   .article-card__meta
+
 jQuery(document).ready(function ($) {
-  $('.divi-100-article-card').find('.et_pb_post').each(function () {
-    var $this = $(this),
-      $standardFormat = $this.hasClass('format-standard'),
-      $hasThumbnail = $this.hasClass('has-post-thumbnail'),
-      $audioFormat = $this.hasClass('format-audio'),
-      $linkFormat = $this.hasClass('format-link'),
-      $quoteFormat = $this.hasClass('format-quote');
+  if (!$('.divi-100-article-card')) {
+    return false;
+  } else {
+    $('.et_pb_blog_grid').find('.et_pb_post').each(function() {
+      var $this = $(this);
 
+      /**
+       * Adds article-card class to div
+       */
+      $this
+        .addClass('article-card');
 
-    // Check if module has thumbnail
-    if (!$standardFormat | $hasThumbnail) {
+      /**
+       * Creates content div and appends to post
+       */
+      $this
+        .append('<div class="article-card__content" />');
 
-      // Add 'article-card' to current module
-      $this.addClass('article-card');
+      /**
+       * Post variables
+       */
+      var postContent = $this.find('.article-card__content');
+      var postMeta = $this.children('.post-meta');
 
-      // Creates post content and appends it to module
-      $this.append('<div class="post-content"></div>');
+      /**
+       * Excerpt variables
+       */
+      var excerpt = $this.clone().children().remove().end().text().trim();
+      var excerptWrap = $('<div class="article-card__excerpt" />');
 
-      var $excerpt = $(this).clone().children().remove().end().text(),
-        $excerpt_wrap = $('<div class="excerpt">'),
-        $post_content = $this.find('.post-content'),
-        $post_meta = $this.children('.post-meta');
-
-      // Append excerpt to post content
-      $excerpt_wrap.text($excerpt).appendTo($post_content);
-
-      // Removes old text from modules
-      $this.contents().filter(function () {
-        return (this.nodeType == 3);
-      }).remove();
-
-      // Append date
-      $this.find('.published').appendTo(this)
-        .replaceWith(function (i, h) {
-          return h.replace(/(\d+.\s)([\d\D]*)/g, '<div class="date"><span class="day">$1</span><span class="month">$2</span></div>');
-        });
-
-      // Append category
-      $post_meta.children('a').addClass('category').appendTo($post_content);
-
-      // Append author to post content
-      $this.find('.author').appendTo($post_content);
-
-      // Prepend title to post content
-      $this.children('.entry-title').prependTo($post_content);
-
-      // Remove special characters
-      var comments = $post_meta.text().replace(/[^a-zA-Z0-9 ]/g, "").replace("by", "").trim();
-
-      // Remove Post Meta
-      $post_meta.remove();
-
-      // Append comment
-      $('<span class="comments">' + comments + '</span>').appendTo($post_content);
-
-      // Apply accent color to date and category block
-      if (!$quoteFormat && !$linkFormat && !$audioFormat) {
-        var $accent_color = $('#top-header').css('background-color');
-
-        $this.find('.date').css('background-color', $accent_color);
-        $this.find('a.category').css('background-color', $accent_color);
+      if ($this.children('p').not('p.post-meta').length) {
+        excerpt = $this.children('p').not('p.post-meta').text();
+        $this.children('p').not('p.post-meta').remove();
       }
 
-      // Hide excerpt
-      $this.children().children('.excerpt').hide();
+      /**
+       * Check if excerpt is over 100 characters
+       */
+      if (excerpt.length > 80) {
+        excerpt = excerpt.substring(0, 80).split(" ").slice(0, -1).join(" ") + "..."
+      }
 
-      var $short_text = $post_content.children('.excerpt').text().trim().substring(0, 100).split(" ").slice(0, -1).join(" ") + "...";
+      /**
+       * Creates category div based off post-meta children
+       */
+      postMeta
+        .children('a')
+        .addClass('article-card__category')
+        .appendTo(postContent);
 
-      $post_content.children('.excerpt').text($short_text);
+      /**
+       * Appends excerpt to content div
+       */
+      excerptWrap
+        .text(excerpt)
+        .appendTo(postContent);
 
-      function $post_module_size() {
-        var $post_content_height = $post_content.outerHeight();
+      /**
+       * Creates meta div and appends to content
+       */
+      postContent
+        .append('<div class="article-card__meta" />');
 
+      /**
+       * Removes old text from post
+       */
+      $this
+        .contents()
+        .filter(function () {
+          return (this.nodeType == 3);
+        })
+        .remove();
+
+      /**
+       * Creates date div based off .published
+       */
+      $(this).find('.published').text(function() {
+        return $(this).text().slice(0, -6);
+      });
+
+      // $this.find('.published').appendTo(this)
+      //   .replaceWith(function (i, h) {
+      //     return h.replace(/([a-zA-Z]+)([\d\D]*)/g, '<div class="date"><span class="day">$1</span><span class="month">$2</span></div>');
+        // });
+      $this
+        .find('.published')
+        .appendTo(this)
+        .replaceWith(function (i, text) {
+          return (
+            text
+              .replace(/([a-zA-Z]+)([\d\D]*)/g,
+                '<div class="article-card__date">\
+                  <span class="article-card__day">$2</span>\
+                  <span class="article-card__month">$1</span>\
+                </div>'
+              )
+          );
+        });
+
+        /**
+         * Removes comma, spaces from day
+         */
+        $this
+          .find('.article-card__day')
+          .text(function() {
+            return $(this)
+                    .text()
+                    .replace(/\,/g, '')
+                    .trim();
+          });
+
+      /**
+       * Add article-card__title class to title
+       */
+      $this
+        .find('.entry-title')
+        .addClass('article-card__title')
+        .prependTo(postContent);
+
+      /**
+       * Appends author to content div
+       */
+      $this
+        .find('.author')
+        .addClass('article-card__author')
+        .appendTo($this.find('.article-card__meta'));
+
+
+      /**
+       * Get existing comment and appends it to post comment
+       */
+      var comments = postMeta.text().replace(/[^a-zA-Z0-9 ]/g, "").replace("by", "").trim();
+
+      $('<span class="article-card__comments">' + comments + '</span>')
+        .appendTo($this.find('.article-card__meta'));
+
+      /**
+       * Remove old post-meta div
+       */
+      postMeta.remove();
+
+      /**
+       * Hide excerpt by default on desktop
+       */
+      if ($(window).width() > 768) {
+        $this
+          .children()
+          .children('.article-card__excerpt')
+          .hide();
+      }
+
+      /**
+       * Get outer height of content div and applies a padding to card
+       */
+      function postModuleSize() {
+        var postContentHeight = postContent.outerHeight();
 
         $this.css({
-          'padding-bottom': $post_content_height
+          'padding-bottom': postContentHeight
         });
       }
 
-      $post_module_size();
+      setTimeout(postModuleSize, 100);
 
-      $(window).resize(function () {
-
-        $post_module_size();
+      /**
+       * Recall getPostContentSize() on window resize
+       */
+      $(window).resize(function() {
+        postModuleSize();
       });
 
-      // Toggle animate height & opacity on hover
-      $(this).children('.post-content').hover(function () {
-        $(this).children('.excerpt').stop().animate({
-          height: "toggle",
-          opacity: "toggle"
-        }, 200);
-      });
-    }
-  });
+      /**
+       * Handle animations on desktop
+       */
+      if ($(window).width() > 768) {
+
+        /**
+         * Prevents loading incorrect state
+         */
+        setTimeout(function() {
+          $this.on('hover', function () {
+            $this.find('.article-card__excerpt').stop().animate({
+              height: "toggle",
+              opacity: "toggle"
+            }, 200);
+          });
+        });
+      }
+    });
+  }
 });

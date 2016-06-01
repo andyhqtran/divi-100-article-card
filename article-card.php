@@ -139,19 +139,30 @@ class ET_Divi_100_Article_Card {
 				'plugin_id'   => $this->config['plugin_id'],
 				'title'       => $this->config['plugin_name'],
 				'description' => $this->config['plugin_description'],
-				'fields'      => array(
-					array(
-						'type'              => 'toggle',
-						'id'                => 'activate',
-						'label'             => __( 'Activate Article Card' ),
-						'description'       => __( 'Proper description goes here' ),
-						'sanitize_callback' => 'et_divi_100_sanitize_toggle',
-					),
-				),
+				'fields'      => $this->settings_fields(),
 			);
 
 			new Divi_100_Settings( $settings_args );
 		}
+	}
+
+	private function settings_fields() {
+		return array(
+			'activate' => array(
+				'type'              => 'toggle',
+				'id'                => 'activate',
+				'label'             => __( 'Activate Article Card' ),
+				'description'       => __( 'Proper description goes here' ),
+				'sanitize_callback' => 'et_divi_100_sanitize_toggle',
+			),
+			'accent-color' => array(
+				'type'                 => 'color',
+				'id'                   => 'accent-color',
+				'label'                => __( 'Select Accent Color' ),
+				'sanitize_callback'    => 'et_divi_100_sanitize_alpha_color',
+				'default'              => '#ffffff',
+			),
+		);
 	}
 
 	/**
@@ -161,6 +172,19 @@ class ET_Divi_100_Article_Card {
 	function enqueue_frontend_scripts() {
 		wp_enqueue_style( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'assets/css/style.css', array(), $this->config['plugin_version'] );
 		wp_enqueue_script( 'custom-article-cards', plugin_dir_url( __FILE__ ) . 'assets/js/scripts.js', array( 'jquery', 'divi-custom-script' ), $this->config['plugin_version'], true );
+
+		// Add custom css
+		$settings             = $this->settings_fields();
+		$accent_color_default = $settings['accent-color']['default'];
+		$accent_color         = $this->utils->get_value( 'accent-color', $accent_color_default );
+
+		if ( $accent_color && $accent_color !== $accent_color_default ) {
+			$custom_css = sprintf(
+				".article-card__category, .article-card__date, .article-card__sub-title { color: %s; }",
+				et_divi_100_sanitize_alpha_color( $accent_color )
+			);
+			wp_add_inline_style( 'custom-article-cards', $custom_css );
+		}
 	}
 
 	/**

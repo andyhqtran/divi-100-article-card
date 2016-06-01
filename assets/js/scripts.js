@@ -29,7 +29,7 @@ jQuery(document).ready(function ($) {
       var excerpt = $this.clone().children().remove().end().text().trim();
       var excerptWrap = $('<div class="article-card__excerpt" />');
 
-      if ($this.children('p').not('p.post-meta').length) {
+      if ($this.children('p').not('p.post-meta').length > 0) {
         excerpt = $this.children('p').not('p.post-meta').text();
         $this.children('p').not('p.post-meta').remove();
       }
@@ -79,10 +79,6 @@ jQuery(document).ready(function ($) {
         return $(this).text().slice(0, -6);
       });
 
-      // $this.find('.published').appendTo(this)
-      //   .replaceWith(function (i, h) {
-      //     return h.replace(/([a-zA-Z]+)([\d\D]*)/g, '<div class="date"><span class="day">$1</span><span class="month">$2</span></div>');
-        // });
       $this
         .find('.published')
         .appendTo(this)

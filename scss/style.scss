@@ -35,6 +35,7 @@
       position: absolute;
       top: -34px;
       left: 0;
+      display: none;
       background: #212121;
       padding: 10px 15px;
       color: $white;
@@ -42,6 +43,10 @@
       font-weight: 600;
       line-height: 1;
       text-transform: uppercase;
+
+      &:first-of-type {
+        display: block;
+      }
     }
 
     &__date {

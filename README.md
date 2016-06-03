@@ -27,7 +27,7 @@ Divi-100-Article-Card
 ```
 
 ## Installation
-1. You can download the latest release [here]().
+1. You can download the latest release [here](https://github.com/andyhqtran/Divi-100-Article-Card/releases).
 2. Once downloaded, head over the **Plugins** tab in your control panel and hit **Add New**
 3. Activate the plugin.
 4. Create a blank page using the Divi Builder.

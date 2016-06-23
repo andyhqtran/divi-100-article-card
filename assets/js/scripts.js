@@ -139,6 +139,16 @@ jQuery(document).ready(function ($) {
       postMeta.remove();
 
       /**
+       * If .post-content exist, then append contents to excerpt
+       */
+      if ($(this).find('.post-content').length > 0) {
+        $(this)
+          .find('.post-content p')
+          .appendTo($(this)
+          .find('.article-card__excerpt'));
+      }
+
+      /**
        * Hide excerpt by default on desktop
        */
       if ($(window).width() > 768) {

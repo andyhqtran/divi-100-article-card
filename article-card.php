@@ -1,14 +1,14 @@
 <?php
 /**
 * @package Custom_Article_Cards
-* @version 0.0.2
+* @version 0.0.3
 */
 /*
 * Plugin Name: Divi 100 Article Cards
 * Plugin URI: https://elegantthemes.com/
 * Description: This plugin adds in <a href="http://codepen.io/andytran/pen/BNjymy">Article News Card</a> styles support for Divi Blog Post modules.
 * Author: Elegant Themes
-* Version: 0.0.2
+* Version: 0.0.3
 * Author URI: http://elegantthemes.com/
 * License: GPL3
 */

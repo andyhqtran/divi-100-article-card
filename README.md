@@ -1,5 +1,10 @@
 # Article Card
 ![Article Card Preview Image](preview.gif)
+[![GitHub license](https://img.shields.io/badge/license-GPL-blue.svg)](https://raw.githubusercontent.com/andyhqtran/Divi-100-Article-Card/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/andyhqtran/Divi-100-Article-Card.svg)](https://github.com/andyhqtran/Divi-100-Article-Card/issues)
+[![GitHub stars](https://img.shields.io/github/stars/andyhqtran/Divi-100-Article-Card.svg)](https://github.com/andyhqtran/Divi-100-Article-Card/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/andyhqtran/Divi-100-Article-Card.svg)](https://github.com/andyhqtran/Divi-100-Article-Card/network)
+
 The **Divi 100 - Article Card Plugin** is made for Divi as apart of the [Divi 100 series](www.elegantthemes.com/blog/theme-sneak-peeks/the-divi-100-marathon-and-the-countdown-to-divi-3-0) by Elegant Themes. This plugin looks for any page that has the **Blog Module** enabled and applies a new style too.
 
 ## What's Included

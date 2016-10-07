@@ -24,12 +24,12 @@
   },
   "homepage": "https://github.com/andyhqtran/divi-100-article-card#readme",
   "devDependencies": {
-    "autoprefixer": "^6.3.6",
-    "concurrently": "^2.1.0",
-    "csscomb": "^3.1.8",
-    "livereload": "^0.4.1",
-    "node-sass": "^3.7.0",
-    "nodemon": "^1.9.2",
-    "postcss": "^5.0.21"
+    "autoprefixer": "6.3.6",
+    "concurrently": "3.1.0",
+    "csscomb": "3.1.7",
+    "livereload": "0.5.0",
+    "node-sass": "3.7.0",
+    "nodemon": "1.9.2",
+    "postcss": "5.0.21"
   }
 }

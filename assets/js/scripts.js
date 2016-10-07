@@ -12,6 +12,16 @@ jQuery(document).ready(function ($) {
         .addClass('article-card');
 
       /**
+       * Get post link and wrap it around card
+       */
+      var postLink = $this.find('.entry-title a').attr('href');
+
+      $this.wrap(
+        $('<a href="' + postLink + '"/>')
+          .attr('href', postLink)
+      );
+
+      /**
        * Creates content div and appends to post
        */
       $this

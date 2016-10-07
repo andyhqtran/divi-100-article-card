@@ -149,6 +149,17 @@ jQuery(document).ready(function ($) {
       }
 
       /**
+       * If excerpt exist, append to content
+       */
+      $(this)
+        .find('.post-content')
+        .appendTo(
+          $(this)
+            .children()
+            .children('.article-card__excerpt')
+        );
+
+      /**
        * Hide excerpt by default on desktop
        */
       if ($(window).width() > 768) {
